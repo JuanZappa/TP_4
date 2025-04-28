@@ -50,6 +50,7 @@ const ProductoDetalle = () => {
   return (
     <div className="producto-detalle">
       <h2 className="producto-nombre">{producto.nombre}</h2>
+      <h4 className="producto-descripcion">{producto.descripcion}</h4>
       <ProductoImagen src={producto.imagen} alt={producto.nombre} />
       <ProductoPrecio precioReal={producto.precioReal} precioFinal={producto.precioFinal} />
       <ProductoStock cantidadDisponible={stock} />

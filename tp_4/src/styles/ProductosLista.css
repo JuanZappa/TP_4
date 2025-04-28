@@ -4,7 +4,7 @@
   }
   
   h1 {
-    text-align: center; /* Centrado del título */
+    text-align: center; 
     font-size: 2rem;
     color: #333;
     margin-bottom: 20px;
@@ -22,13 +22,13 @@
     padding: 15px 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    margin-bottom: 15px; /* Aumentado el espacio entre elementos */
+    margin-bottom: 15px; 
     transition: background-color 0.3s ease;
-    background-color: #fafafa; /* Agregado color de fondo suave */
+    background-color: #fafafa;
   }
   
   .producto-item:hover {
-    background-color: #f4f4f4; /* Cambio de color en hover */
+    background-color: #f4f4f4;
   }
   
   .producto-info {
@@ -59,6 +59,6 @@
   }
   
   .producto-item {
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Agregado sombra para mejorar la vista */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
   

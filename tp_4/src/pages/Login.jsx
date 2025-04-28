@@ -1,22 +1,41 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import '../styles/Login.css';
 
 function Login() {
-  const [usuario, setUsuario] = useState('');
-  const [contraseña, setContraseña] = useState('');
+  const [form_values_state, setFormValuesState] = useState()
+
+  const fields = {
+    USUARIO: 'usuario',
+    PASSWORD: 'password'
+  }
+  
   const [error, setError] = useState('');
   const auth = useAuth();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setError('');
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!usuario || !contraseña) {
+    const form_data = new FormData(e.target)
+    const form_values = {}
+
+    for(let field in fields){
+      form_values[fields[field]] = form_data.get(fields[field])
+    }
+
+    setFormValuesState(form_values)
+
+    if (!form_values.usuario || !form_values.password) {
       setError('Ambos campos son obligatorios');
       return;
     }
-    const success = auth.login(usuario, contraseña);
+    const success = auth.login(form_values[fields.USUARIO], form_values[fields.PASSWORD]);
     if (success) {
       navigate('/productos');
     } else {
@@ -28,14 +47,17 @@ function Login() {
     <form onSubmit={handleSubmit} className="form">
       <h2>Iniciar sesión</h2>
       <div>
-        <label>Usuario:</label>
-        <input value={usuario} onChange={(e) => setUsuario(e.target.value)} />
+        <label htmlFor='usuario'>Usuario:</label>
+        <input type='text' placeholder='Ingrese el usuario' id='usuario' name={fields.USUARIO} />
       </div>
       <div>
-        <label>Contraseña:</label>
-        <input type="password" value={contraseña} onChange={(e) => setContraseña(e.target.value)} />
+        <label htmlFor='password'>Contraseña:</label>
+        <input type="password" id='password' name={fields.PASSWORD} />
       </div>
       <button type="submit">Ingresar</button>
+      <div className="register-link">
+        <a href="/register">¿No tienes una cuenta? Regístrate</a>
+      </div>
       {error && <p className="error">{error}</p>}
     </form>
   );
